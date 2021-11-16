@@ -6,11 +6,15 @@ import {ClarityModule} from '@clr/angular';
 import {ReactiveFormsModule} from '@angular/forms';
 import { TaskListComponent } from './task-list/task-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TaskAddComponent } from './task-add/task-add.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TaskListComponent
+    TaskListComponent,
+    TaskAddComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,
