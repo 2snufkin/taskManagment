@@ -1,0 +1,13 @@
+<!-- the false is important - if I assign it to ture, the window will display an X that will allow me to close it mechanically-->
+<!-- but not programicly and this will cause a problem since task number won't be reset to null and the window couldn't -->
+<!-- be reopen again-->
+<clr-modal [clrModalOpen]="taskNo" [clrModalClosable]="false">
+ <h3 class="modal-title">Task #{{taskNo}}</h3>
+ <div class="modal-body">
+   <p>Did you finish task No.{{taskNo}}?</p>
+ </div>
+ <div class="modal-footer">
+  <button type="button" class="btn btn-outline" (click)="disagree()">No, abort</button>
+  <button type="button" class="btn btn-danger" (click)="agree()">Yes, continue</button>
+ </div>
+ </clr-modal>

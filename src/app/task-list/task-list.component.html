@@ -1,0 +1,57 @@
+<ng-container *ngIf="showList">
+  <clr-datagrid>
+    <!--  columns  - static dont touch it-->
+    <!--  the clrDg has a sort option out of the box but only for strings, if I want a different data type I must mention it
+      like I did in the next line-->
+    <clr-dg-column [clrDgField]="'issueNo'" [clrDgColType]="'number'">Task No.</clr-dg-column>
+    <clr-dg-column [clrDgField]="'created'">Created</clr-dg-column>
+    <clr-dg-column [clrDgField]="'type'">Type</clr-dg-column>
+    <clr-dg-column [clrDgField]="'title'">Title</clr-dg-column>
+    <clr-dg-column [clrDgField]="'description'">Description</clr-dg-column>
+    <clr-dg-column [clrDgField]="'priority'">Priority</clr-dg-column>
+    <clr-dg-column [clrDgField]="'completed'">Completed</clr-dg-column>
+    <!--  end of columns-->
+
+    <!--  like ngFor - Irun all over the array annd for each item...-->
+    <clr-dg-row *clrDgItems="let task of tasks">
+      <clr-dg-action-overflow>
+        <button class="action-item" (click)="completedTask=task">Complete</button>
+        <button class="action-item" (click)="editTask=task">Edit</button>
+        <button class="action-item" (click)="deleteTask(task.task_no)">Delete</button>
+      </clr-dg-action-overflow>
+      <!--    every cell correspond to Task object attribute-->
+
+      <clr-dg-cell>{{task.task_no }}</clr-dg-cell>
+      <clr-dg-cell>{{task.created | date}}</clr-dg-cell>
+      <clr-dg-cell>{{task.type | titlecase}}</clr-dg-cell>
+      <clr-dg-cell>{{task.title | uppercase}}</clr-dg-cell>
+      <clr-dg-cell>{{task.description | titlecase}}</clr-dg-cell>
+      <clr-dg-cell>
+        <span class="label" [class.label-danger]="task.priority == 'high'"> {{task.priority}}</span>
+      </clr-dg-cell>
+      <clr-dg-cell>{{task?.completed | date}}</clr-dg-cell>
+
+      <!--    end of Object data - of rows-->
+    </clr-dg-row>
+
+
+    <!--  footer : used to display the sum of tasks-->
+    <clr-dg-footer>
+      {{tasks.length}} Issue
+    </clr-dg-footer>
+  </clr-datagrid>
+  <button class="btn btn-primary" (click)="showList = false">Add task</button>
+  <button class="btn btn-primary" type="button" (click)="clearAll()">Clear All</button>
+
+</ng-container>
+
+<app-task-add *ngIf="showList === false" (updateTable)="showList = true"></app-task-add>
+
+<app-confirmation *ngIf="completedTask"
+                  [taskNo]="completedTask.task_no"
+                  (eventEmitter)="onConfirm($event)"
+></app-confirmation>
+
+<app-edit-task *ngIf="editTask"
+               [taskNo]="editTask.task_no"
+               (updateTable)="onEdit($event)"></app-edit-task>

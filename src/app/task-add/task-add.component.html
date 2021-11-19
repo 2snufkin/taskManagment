@@ -1,0 +1,77 @@
+<h3>Add a task</h3>
+<form clrForm [formGroup]="taskForm" (ngSubmit)="onAddTask()">
+
+  <!--    input unit-->
+  <clr-input-container>
+    <label>Title</label>
+    <input clrInput formControlName="title"/>
+    <clr-control-error>Title is required</clr-control-error>
+
+  </clr-input-container>
+  <!--  suggestions-->
+  <div class="clr-row" *ngIf="suggestions.length">
+    <div class="clr-col-lg-2"></div>
+    <div class="clr-col-lg-6">
+      <clr-stack-view>
+        <clr-stack-header>
+          Similar Tasks
+        </clr-stack-header>
+        <clr-stack-block *ngFor="let t of suggestions">
+          <clr-stack-label>
+            #{{t.task_no}}.{{t.title}}
+          </clr-stack-label>
+          <clr-stack-content>
+            {{t.description}}
+          </clr-stack-content>
+
+        </clr-stack-block>
+      </clr-stack-view>
+
+    </div>
+
+
+  </div>
+  <!--  errorMessage-->
+  <!--  end input unit-->
+  <clr-textarea-container>
+    <label>Description</label>
+    <textarea clrTextarea formControlName="description"></textarea>
+  </clr-textarea-container>
+  <!-- end description-->
+  <clr-radio-container clrInline>
+    <label>Priority</label>
+    <!--    button radio option-->
+    <clr-radio-wrapper>
+      <input type="radio" clrRadio value="low" formControlName="priority"/>
+      <label>Low</label>
+
+    </clr-radio-wrapper>
+
+    <!--    button radio option-->
+
+    <clr-radio-wrapper>
+      <input type="radio" clrRadio value="high" formControlName="priority"/>
+      <label>High</label>
+
+    </clr-radio-wrapper>
+    <!--  errorMessage-->
+    <clr-control-error>Priority is required</clr-control-error>
+
+  </clr-radio-container>
+  <!--  end of radio buttons-->
+  <clr-select-container>
+    <label>Type</label>
+    <select clrSelect formControlName="type">
+      <option value="enrichment">Enrichment</option>
+      <option value="projects" selected>Project</option>
+      <option value="hobbies">Hobbies</option>
+      <option value="house">House</option>
+    </select>
+    <!--  errorMessage-->
+    <clr-control-error>Type is required</clr-control-error>
+
+  </clr-select-container>
+  <button class="btn btn-primary" type="submit">Add Task</button>
+  <button class="btn btn-primary" type="button" (click)="updateTable.emit(true)">Cancel</button>
+</form>
+

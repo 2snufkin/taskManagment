@@ -1,0 +1,50 @@
+<clr-modal [clrModalOpen]="taskNo" [clrModalClosable]="false">
+  <h3 class="modal-title">Edit Task #{{taskNo}}</h3>
+  <div class="modal-body">
+    <form clrForm [formGroup]="taskForm" (ngSubmit)="onEditTask()">
+
+      <!--    input unit-->
+      <clr-input-container>
+        <label>Title</label>
+        <input clrInput formControlName="title"/>
+        <clr-control-error>Title is required</clr-control-error>
+
+      </clr-input-container>
+
+      <!--  end input unit-->
+      <clr-textarea-container>
+        <label>Description</label>
+        <textarea clrTextarea formControlName="description"></textarea>
+      </clr-textarea-container>
+      <!-- end description-->
+      <clr-radio-container clrInline>
+        <label>Priority</label>
+        <!--    button radio option-->
+        <clr-radio-wrapper>
+          <input type="radio" clrRadio value="low" formControlName="priority"/>
+          <label>Low</label>
+
+        </clr-radio-wrapper>
+
+        <!--    button radio option-->
+
+        <clr-radio-wrapper>
+          <input type="radio" clrRadio value="high" formControlName="priority"/>
+          <label>High</label>
+
+        </clr-radio-wrapper>
+        <!--  errorMessage-->
+        <clr-control-error>Priority is required</clr-control-error>
+
+      </clr-radio-container>
+      <!--  end of radio buttons-->
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline">No, abort</button>
+        <button type="submit" class="btn btn-danger">Yes, continue</button>
+      </div>
+    </form>
+  </div>
+
+</clr-modal>
