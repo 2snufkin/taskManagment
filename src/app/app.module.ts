@@ -8,13 +8,15 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TaskAddComponent } from './task-add/task-add.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskListComponent,
     TaskAddComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    EditTaskComponent
   ],
   imports: [
     BrowserModule,
